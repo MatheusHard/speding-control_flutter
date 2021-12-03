@@ -30,4 +30,6 @@ class AppGradients {
     center: Alignment.center,
     radius: 0.0,
   );
+
+
 }
