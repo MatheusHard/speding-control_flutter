@@ -1,3 +1,4 @@
+import 'package:control_speding_2/ui/home.dart';
 import 'package:control_speding_2/utils/core/app_text_styles.dart';
 import 'package:control_speding_2/utils/metods/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,6 +14,8 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  var _scaffoldKey = new GlobalKey<ScaffoldState>();
+
 
   final TextEditingController _user = TextEditingController();
   final TextEditingController _password = TextEditingController();
@@ -31,7 +34,9 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     /* appBar: AppBar(
+      key: _scaffoldKey,
+
+      /* appBar: AppBar(
         centerTitle: true,
         title: const Text("Controle de gastos f"),
         backgroundColor: Colors.blue,
@@ -82,14 +87,14 @@ class _LoginState extends State<Login> {
                           hintText: "digite o usuario",
                           icon: Icon(Icons.perm_identity)
                       ),
-                      validator: (value){
-                        if(value!.isEmpty || value == ""){
-                          _myFocusNode.requestFocus();
-                          //Utils.showDefaultSnackbar(context, );
-                          return "Insira seu nome!!!";
-
-                        }
+                      validator:  (value){
+                      if(value!.isEmpty || value == ""){
+                      _myFocusNode.requestFocus();
+                      return "Digite o Usuario";
+                      }
+                      return null;
                       },
+
                     ),
                   ),
 
@@ -97,7 +102,7 @@ class _LoginState extends State<Login> {
                     padding: const EdgeInsets.fromLTRB(50, 0, 50, 50),
                     child: TextFormField(
                       obscureText: true,
-                      controller: _user,
+                      controller: _password,
                       focusNode: _myFocusNode_2,
                       keyboardType: TextInputType.text,
                       decoration: const InputDecoration(
@@ -105,13 +110,12 @@ class _LoginState extends State<Login> {
                           hintText: "digite a senha",
                           icon: Icon(Icons.perm_identity)
                       ),
-                      validator: (value){
+                      validator:  (value){
                         if(value!.isEmpty || value == ""){
-                          _myFocusNode_2.requestFocus();
-                          //Utils.showDefaultSnackbar(context, );
-                          return "Insira a senha!!!";
-
+                          _myFocusNode.requestFocus();
+                          return "Digite a Senha";
                         }
+                        return null;
                       },
                     ),
                   ),
@@ -122,13 +126,14 @@ class _LoginState extends State<Login> {
     child: Center(
     child: ElevatedButton(
     onPressed: () {
-    /*if(_selectedFile != null)  {
-    if(_formKey.currentState.validate()) {
-    _cadastrarConta();
-    }
+    //if(_selectedFile != null)  {
+    if(_formKey.currentState!.validate()) {
+    _logar(context);
+    print("logado");
+    //}
     }else{
-    Utils.showDefaultSnackbar(_scaffoldKey, "Foto obrigatória!!! ");
-    }*/
+    //Utils.showDefaultSnackbar(_scaffoldKey, "Preencha  obrigatória!!! ");
+    }
     },
     style: ElevatedButton.styleFrom(
     padding: EdgeInsets.zero,
@@ -170,7 +175,21 @@ class _LoginState extends State<Login> {
     );
   }
 
+_logar(BuildContext context) async{
+
+    setState(() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Home()),
+      );
+
+    });
 
 
+}
+  clearControllers(){
+    _user.clear();
+    _password.clear();
+  }
 
 }
