@@ -68,6 +68,17 @@ class _LoginState extends State<Login> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:<Widget> [
 
+                   Padding(
+                     padding: const EdgeInsets.only(bottom: 50.0),
+                     child: Center(
+                      child: Container(
+                      height: 100,
+                      width: 100,
+                      child: Image.asset(
+                        'assets/images/gasto.png'
+                      , ),
+                  ),),
+                   ),
                   const Center(
                     child: Text("Login", style: TextStyle(
                       color: Colors.blueAccent,
@@ -126,14 +137,11 @@ class _LoginState extends State<Login> {
     child: Center(
     child: ElevatedButton(
     onPressed: () {
-    //if(_selectedFile != null)  {
-    if(_formKey.currentState!.validate()) {
+    //if(_formKey.currentState!.validate()) {
     _logar(context);
-    print("logado");
+    //print("logado");
+
     //}
-    }else{
-    //Utils.showDefaultSnackbar(_scaffoldKey, "Preencha  obrigatória!!! ");
-    }
     },
     style: ElevatedButton.styleFrom(
     padding: EdgeInsets.zero,
