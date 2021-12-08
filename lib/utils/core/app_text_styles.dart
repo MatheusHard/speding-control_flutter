@@ -16,6 +16,12 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
   );
 
+  static final TextStyle titleLogin = GoogleFonts.notoSans(
+    color: AppColors.white,
+    fontSize: 25,
+    fontWeight: FontWeight.w600,
+  );
+
   static final TextStyle heading = GoogleFonts.notoSans(
     color: AppColors.black,
     fontSize: 18,

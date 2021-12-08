@@ -1,4 +1,5 @@
 import 'package:control_speding_2/ui/home.dart';
+import 'package:control_speding_2/utils/core/app_gradients.dart';
 import 'package:control_speding_2/utils/core/app_text_styles.dart';
 import 'package:control_speding_2/utils/metods/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -49,17 +50,7 @@ class _LoginState extends State<Login> {
         child: Center(
           child: Container(
             decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFFE5E6E4),
-                      Color(0xFFECECEB),
-                      Color(0xFFF2F3F2),
-                      Color(0xFFF9F9F8),
-                    ],
-                    stops: [0.1,0.4,0.7,0.9]
-                )
+                gradient: AppGradients.linear
             ),
           child: Form(
               key: _formKey,
@@ -133,7 +124,7 @@ class _LoginState extends State<Login> {
                   /*************BUTTON***************/
 
     Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 120, vertical: 10),
+    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
     child: Center(
     child: ElevatedButton(
     onPressed: () {
@@ -169,7 +160,7 @@ class _LoginState extends State<Login> {
 
     Text(
     'Acessar',
-    style: AppTextStyles.titleBold,
+    style: AppTextStyles.titleLogin,
     ),
 
 
