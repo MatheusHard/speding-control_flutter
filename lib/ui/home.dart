@@ -1,3 +1,4 @@
+import 'package:control_speding_2/ui/viagens.dart';
 import 'package:control_speding_2/ui/widgets/appbar/app_bar_widget.dart';
 import 'package:control_speding_2/utils/core/app_gradients.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -15,9 +16,8 @@ class _HomeState extends State<Home> {
 
   int _currentIndex = 0;
   final tabs = [
-    const Center(child: Text("Viagens")),
 
-    //const Viagens(),
+    const Viagens(),
     const Center(child: Text("Cadastro")),
     const Center(child: Text("Nuvem")),
     //Cadastro_Avaliacao(),
