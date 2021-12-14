@@ -1,5 +1,7 @@
 
+import 'package:control_speding_2/data_model/cidade_data_model.dart';
 import 'package:control_speding_2/data_model/uf_data_model.dart';
+import 'package:control_speding_2/models/cidade.dart';
 import 'package:control_speding_2/models/uf.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:io';
@@ -34,10 +36,12 @@ class DBHelper{
   void _onCreate(Database db, int version) async{
 
     await db.execute(UfDataModel.criarTabela());
-   // await db.execute(TipoDataModel.criarTabela());
+    await db.execute(CidadeDataModel.criarTabela());
 
 
   }
+
+  /******CRUD UF******/
 
   Future<List<Uf>>getUfs() async {
     Database db = await instance.database;
@@ -52,6 +56,34 @@ class DBHelper{
     Database db = await instance.database;
     return await db.insert(UfDataModel.getTabela(), uf.toMap());
   }
+
+/******CRUD CIDADE******/
+
+  Future<List<Cidade>>getCidades() async {
+    Database db = await instance.database;
+    var cidades = await db.query(CidadeDataModel.getTabela(), orderBy: CidadeDataModel.descricao_cidade);
+    List<Cidade> cidadeList = cidades.isNotEmpty
+        ? cidades.map((c) => Cidade.fromMap(c)).toList()
+        : [];
+    return cidadeList;
+  }
+
+  Future<int> addCidade(Cidade c) async {
+    Database db = await instance.database;
+    return await db.insert(CidadeDataModel.getTabela(), c.toMap());
+  }
+
+  Future<List> getCidadesUfs() async {
+    Database db = await instance.database;
+    var res = await db.rawQuery('''SELECT c.${CidadeDataModel.id}, c.${CidadeDataModel.descricao_cidade},
+        c.${CidadeDataModel.uf_id}, u.${UfDataModel.descricao_uf} FROM ${CidadeDataModel.getTabela()} c
+         INNER JOIN ${UfDataModel.getTabela()} u WHERE u.${UfDataModel.id} = c.${CidadeDataModel.uf_id}
+         ORDER BY c.${CidadeDataModel.descricao_cidade}''');
+
+    return res.toList();
+  }
+
+
 }
 
 

@@ -1,17 +1,17 @@
 
-class UfDataModel{
+class CidadeDataModel{
 
-  static const String TABELA = "tabelaUf";
+  static const String TABELA = "tabelaCidade";
   static const String id = "id";
-  static const String descricao_uf = "descricao_uf";
-  static const String sigla_uf = "sigla_uf";
+  static const String descricao_cidade = "descricao_cidade";
+  static const String uf_id = "uf_id";
 
    static String queryCriarTabela = "";
 
    static String criarTabela() {
 
     return '''CREATE TABLE $TABELA ($id INTEGER PRIMARY KEY,
-              $descricao_uf TEXT, $sigla_uf  TEXT);''';
+              $descricao_cidade TEXT, $uf_id  INTEGER);''';
    }
 
    static String dropDatabase(){
@@ -28,7 +28,7 @@ class UfDataModel{
   }
 
   static String getAtributos(){
-     return '''$TABELA.id, $TABELA.descricao_uf, $TABELA.sigla_uf''';
+     return '''$TABELA.id, $TABELA.descricao_cidade, $TABELA.uf_id''';
   }
 }
 
