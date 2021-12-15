@@ -4,6 +4,7 @@ import 'package:control_speding_2/data_model/especificacao_gastos_data_model.dar
 import 'package:control_speding_2/data_model/sub_especificacoes_gastos_data_model.dart';
 import 'package:control_speding_2/data_model/uf_data_model.dart';
 import 'package:control_speding_2/models/cidade.dart';
+import 'package:control_speding_2/models/especificacao_gastos.dart';
 import 'package:control_speding_2/models/uf.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:io';
@@ -85,6 +86,13 @@ class DBHelper{
 
     return res.toList();
   }
+  /******CRUD ESPECIFICACOES******/
+
+  Future<int> addEspecificacao(Especificacao e) async {
+    Database db = await instance.database;
+    return await db.insert(EspecificacaoDataModel.getTabela(), e.toMap());
+  }
+
 
 
 }
