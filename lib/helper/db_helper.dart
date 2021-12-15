@@ -1,5 +1,7 @@
 
 import 'package:control_speding_2/data_model/cidade_data_model.dart';
+import 'package:control_speding_2/data_model/especificacao_gastos_data_model.dart';
+import 'package:control_speding_2/data_model/sub_especificacoes_gastos_data_model.dart';
 import 'package:control_speding_2/data_model/uf_data_model.dart';
 import 'package:control_speding_2/models/cidade.dart';
 import 'package:control_speding_2/models/uf.dart';
@@ -37,7 +39,8 @@ class DBHelper{
 
     await db.execute(UfDataModel.criarTabela());
     await db.execute(CidadeDataModel.criarTabela());
-
+    await db.execute(EspecificacaoDataModel.criarTabela());
+    await db.execute(SubEspecificacaoDataModel.criarTabela());
 
   }
 

@@ -26,12 +26,12 @@ void main() async{
   }*/
 
     for (var c in _dados){
-      print(c.id);
-   /* print("ID Cidade "+c.id);
-    print("Desc Cidade "+c.descricao_cidade);
-    print("ID UF "+c.uf_id.toString());
-    print("Desc UF"+c.uf!.descricao_uf.toString());
-*/
+      //print(c.id);
+    print(c['id']);
+    //print("Desc Cidade "+c.descricao_cidade);
+    //print("ID UF "+c.uf_id.toString());
+    //print("Desc UF"+c.uf!.descricao_uf.toString());
+
   }
 
   runApp(
