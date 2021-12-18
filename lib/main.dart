@@ -4,6 +4,7 @@ import 'package:control_speding_2/apis/cidade_api.dart';
 import 'package:control_speding_2/helper/db_helper.dart';
 import 'package:control_speding_2/models/cidade.dart';
 import 'package:control_speding_2/models/especificacao_gastos.dart';
+import 'package:control_speding_2/models/sub_especificacao_gastos.dart';
 import 'package:control_speding_2/models/uf.dart';
 import 'package:control_speding_2/ui/login.dart';
 import 'package:flutter/material.dart';
@@ -20,18 +21,20 @@ void main() async{
 
   //List _dados = await DBHelper.instance.getCidadesUfs();
 
- // await EspecificacaoApi().getJson();
+  //await EspecificacaoApi().getJson();
 
  /// print(DBHelper.instance.addEspecificacao(Especificacao(descricao_especificacao_gasto: "Trasnporte")));
-  List _dados = await DBHelper.instance.getEspecificacoes();
+  List _dados = await DBHelper.instance.getSubEspecificacoes();
  // List _dados = await DBHelper.instance.getUfs();
 
-  print(_dados);
+ // print(_dados);
 
-  for (Especificacao e in _dados) {
+  for (SubEspecificacao e in _dados) {
     print("----------------------------------------");
     print("ID Especificacao: " + e.id.toString());
-    print("Desc Especificacao: " + e.descricao_especificacao_gasto.toString());
+    print("Desc Especificacao: " + e.descricao_sub_especificacao_gasto.toString());
+    print("Desc Especificacao ID: " + e.especificacao_gasto_id.toString());
+
   }
 
     /*for (var c in _dados){

@@ -22,13 +22,13 @@ class EspecificacaoApi{
 
 
     if(response.statusCode == 200) {
-      //await DBHelper.instance.de
 
-      //Pegar dados da API:
-     // List _dados = json.decode(response.body);
+      ///Zerar Tabelas:
+      await DBHelper.instance.zerarTabelaEspecificacao();
+      await DBHelper.instance.zerarTabelaSubEspecificacao();
 
-      /**Inserir no DB interno dados da API:**/
 
+      ///Inserir no DB interno dados da API:
       for (int i = 0; i < _dados.length; i++) {
 
        await DBHelper.instance.addEspecificacao(Especificacao(descricao_especificacao_gasto: _dados[i]["descricao_especificacao_gasto"]));
@@ -36,11 +36,11 @@ class EspecificacaoApi{
 
        for (int j = 0; j < sub.length; j++) {
          await DBHelper.instance.addSubEspecificacao(
-                                                    SubEspecificacao(
+                                                    SubEspecificacao(id: sub[j]["id"],
                                                                     descricao_sub_especificacao_gasto: sub[j]["descricao_sub_especificacao_gasto"],
-                                                                    especificacao_gasto_id: sub[j]["especificacao_gasto_id"]));
+                                                                    especificacao_gasto_id: _dados[i]["id"]));
 
-         print(sub[j]);
+       // print(sub[j]);
       }
       }
 

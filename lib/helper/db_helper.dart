@@ -103,6 +103,13 @@ class DBHelper{
     return await db.insert(EspecificacaoDataModel.getTabela(), e.toMap());
   }
 
+
+  Future<int> zerarTabelaEspecificacao() async {
+    Database db = await instance.database;
+    return await db.rawDelete(EspecificacaoDataModel.zerarTabela());
+
+  }
+
   /******CRUD SUB_ESPECIFICACOES******/
 
   Future<List<SubEspecificacao>>getSubEspecificacoes() async {
@@ -118,6 +125,18 @@ class DBHelper{
     Database db = await instance.database;
     return await db.insert(SubEspecificacaoDataModel.getTabela(), s.toMap());
   }
+
+  Future<int> removeSubEspecificacao(int id) async{
+    Database db = await instance.database;
+    return await db.delete(SubEspecificacaoDataModel.TABELA, where: 'id = ?', whereArgs: [id]);
+  }
+
+  Future<int> zerarTabelaSubEspecificacao() async {
+    Database db = await instance.database;
+    return await db.rawDelete(SubEspecificacaoDataModel.zerarTabela());
+
+  }
+
 
 
 
