@@ -11,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
   class Utils {
 
 
-  static String URL_WEB_SERVICE = "http://192.168.1.7:8080/api/";
+  static String URL_WEB_SERVICE = "http://192.168.0.11:8080/api/";
   //String URL_WEB_SERVICE = "http://avaliacoes-backend.herokuapp.com/";
 static const String IMG_KEY = 'IMAGE_KEY';
 

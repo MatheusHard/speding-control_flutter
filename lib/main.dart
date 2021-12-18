@@ -20,18 +20,19 @@ void main() async{
 
   //List _dados = await DBHelper.instance.getCidadesUfs();
 
-  await EspecificacaoApi().getJson();
+ // await EspecificacaoApi().getJson();
 
  /// print(DBHelper.instance.addEspecificacao(Especificacao(descricao_especificacao_gasto: "Trasnporte")));
-  //List _dados = await DBHelper.instance.getCidades();
+  List _dados = await DBHelper.instance.getEspecificacoes();
  // List _dados = await DBHelper.instance.getUfs();
 
-  //print(_dados);
+  print(_dados);
 
-  /*for (Uf u in _dados) {
-    print("ID Cidade " + u.id.toString());
-    print("Desc Cidade " + u.descricao_uf.toString());
-  }*/
+  for (Especificacao e in _dados) {
+    print("----------------------------------------");
+    print("ID Especificacao: " + e.id.toString());
+    print("Desc Especificacao: " + e.descricao_especificacao_gasto.toString());
+  }
 
     /*for (var c in _dados){
 

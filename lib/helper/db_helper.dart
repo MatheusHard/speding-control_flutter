@@ -5,6 +5,7 @@ import 'package:control_speding_2/data_model/sub_especificacoes_gastos_data_mode
 import 'package:control_speding_2/data_model/uf_data_model.dart';
 import 'package:control_speding_2/models/cidade.dart';
 import 'package:control_speding_2/models/especificacao_gastos.dart';
+import 'package:control_speding_2/models/sub_especificacao_gastos.dart';
 import 'package:control_speding_2/models/uf.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:io';
@@ -88,9 +89,34 @@ class DBHelper{
   }
   /******CRUD ESPECIFICACOES******/
 
+  Future<List<Especificacao>>getEspecificacoes() async {
+    Database db = await instance.database;
+    var especificacoes = await db.query(EspecificacaoDataModel.getTabela(), orderBy: EspecificacaoDataModel.descricao_especificacao_gasto);
+    List<Especificacao> especificacaoList = especificacoes.isNotEmpty
+        ? especificacoes.map((e) => Especificacao.fromMap(e)).toList()
+        : [];
+    return especificacaoList;
+  }
+
   Future<int> addEspecificacao(Especificacao e) async {
     Database db = await instance.database;
     return await db.insert(EspecificacaoDataModel.getTabela(), e.toMap());
+  }
+
+  /******CRUD SUB_ESPECIFICACOES******/
+
+  Future<List<SubEspecificacao>>getSubEspecificacoes() async {
+    Database db = await instance.database;
+    var sub_especificacoes = await db.query(SubEspecificacaoDataModel.getTabela(), orderBy: SubEspecificacaoDataModel.descricao_sub_especificacao_gasto);
+    List<SubEspecificacao> sub_especificacaoList = sub_especificacoes.isNotEmpty
+        ? sub_especificacoes.map((e) => SubEspecificacao.fromMap(e)).toList()
+        : [];
+    return sub_especificacaoList;
+  }
+
+  Future<int> addSubEspecificacao(SubEspecificacao s) async {
+    Database db = await instance.database;
+    return await db.insert(SubEspecificacaoDataModel.getTabela(), s.toMap());
   }
 
 

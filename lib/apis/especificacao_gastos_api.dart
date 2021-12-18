@@ -1,6 +1,7 @@
 
 import 'package:control_speding_2/helper/db_helper.dart';
 import 'package:control_speding_2/models/especificacao_gastos.dart';
+import 'package:control_speding_2/models/sub_especificacao_gastos.dart';
 import 'package:control_speding_2/utils/metods/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -17,20 +18,35 @@ class EspecificacaoApi{
     http.Response response = await http.get(url);
 
     List _dados = json.decode(response.body);
-    print(_dados);
+    //print(_dados);
+
+
     if(response.statusCode == 200) {
       //await DBHelper.instance.de
 
       //Pegar dados da API:
-      List _dados = json.decode(response.body);
+     // List _dados = json.decode(response.body);
 
       /**Inserir no DB interno dados da API:**/
 
       for (int i = 0; i < _dados.length; i++) {
 
-      var f =   await DBHelper.instance.addEspecificacao(Especificacao(descricao_especificacao_gasto: _dados[i]["descricao_especificacao_gasto"]));
-      print(f);
+       await DBHelper.instance.addEspecificacao(Especificacao(descricao_especificacao_gasto: _dados[i]["descricao_especificacao_gasto"]));
+       var sub = _dados[i]['sub_especificacoes_gastos'];
+
+       for (int j = 0; j < sub.length; j++) {
+         await DBHelper.instance.addSubEspecificacao(
+                                                    SubEspecificacao(
+                                                                    descricao_sub_especificacao_gasto: sub[j]["descricao_sub_especificacao_gasto"],
+                                                                    especificacao_gasto_id: sub[j]["especificacao_gasto_id"]));
+
+         print(sub[j]);
       }
+      }
+
+
+
+
       //List d = await DBHelper.instance.getCidadesUfs();
       //print(d);
 
