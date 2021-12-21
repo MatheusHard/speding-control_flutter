@@ -1,10 +1,12 @@
 
 import 'package:control_speding_2/data_model/cidade_data_model.dart';
 import 'package:control_speding_2/data_model/especificacao_gastos_data_model.dart';
+import 'package:control_speding_2/data_model/setor_data_model.dart';
 import 'package:control_speding_2/data_model/sub_especificacoes_gastos_data_model.dart';
 import 'package:control_speding_2/data_model/uf_data_model.dart';
 import 'package:control_speding_2/models/cidade.dart';
 import 'package:control_speding_2/models/especificacao_gastos.dart';
+import 'package:control_speding_2/models/setor.dart';
 import 'package:control_speding_2/models/sub_especificacao_gastos.dart';
 import 'package:control_speding_2/models/uf.dart';
 import 'package:sqflite/sqflite.dart';
@@ -43,6 +45,7 @@ class DBHelper{
     await db.execute(CidadeDataModel.criarTabela());
     await db.execute(EspecificacaoDataModel.criarTabela());
     await db.execute(SubEspecificacaoDataModel.criarTabela());
+    await db.execute(SetorDataModel.criarTabela());
 
   }
 
@@ -87,6 +90,7 @@ class DBHelper{
 
     return res.toList();
   }
+
   /******CRUD ESPECIFICACOES******/
 
   Future<List<Especificacao>>getEspecificacoes() async {
@@ -137,7 +141,30 @@ class DBHelper{
 
   }
 
+  /******CRUD SETOR FUNCIONARIO******/
 
+  Future<List<Setor>>getSetores() async {
+
+    Database db = await instance.database;
+    var setores = await db.query(SetorDataModel.getTabela(), orderBy: SetorDataModel.descricao_setor);
+    List<Setor> setorList = setores.isNotEmpty
+        ? setores.map((s) => Setor.fromMap(s)).toList()
+        : [];
+    return setorList;
+  }
+
+  Future<int> addsetor(Setor s) async {
+    Database db = await instance.database;
+    return await db.insert(SetorDataModel.getTabela(), s.toMap());
+  }
+
+
+
+  Future<int> zerarTabelaSetor() async {
+    Database db = await instance.database;
+    return await db.rawDelete(SetorDataModel.zerarTabela());
+
+  }
 
 
 }

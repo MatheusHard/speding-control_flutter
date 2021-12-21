@@ -4,6 +4,7 @@ import 'package:control_speding_2/apis/cidade_api.dart';
 import 'package:control_speding_2/helper/db_helper.dart';
 import 'package:control_speding_2/models/cidade.dart';
 import 'package:control_speding_2/models/especificacao_gastos.dart';
+import 'package:control_speding_2/models/setor.dart';
 import 'package:control_speding_2/models/sub_especificacao_gastos.dart';
 import 'package:control_speding_2/models/uf.dart';
 import 'package:control_speding_2/ui/login.dart';
@@ -23,17 +24,28 @@ void main() async{
 
   //await EspecificacaoApi().getJson();
 
- /// print(DBHelper.instance.addEspecificacao(Especificacao(descricao_especificacao_gasto: "Trasnporte")));
-  List _dados = await DBHelper.instance.getSubEspecificacoes();
+  //print(DBHelper.instance.addsetor(Setor(descricao_setor: "Infra")));
+
+  //List _dados = await DBHelper.instance.getSubEspecificacoes();
  // List _dados = await DBHelper.instance.getUfs();
+   List _dados = await DBHelper.instance.getSetores();
 
- // print(_dados);
 
-  for (SubEspecificacao e in _dados) {
+  // print(_dados);
+
+  /*for (SubEspecificacao e in _dados) {
     print("----------------------------------------");
     print("ID Especificacao: " + e.id.toString());
     print("Desc Especificacao: " + e.descricao_sub_especificacao_gasto.toString());
     print("Desc Especificacao ID: " + e.especificacao_gasto_id.toString());
+
+  }*/
+
+
+  for (Setor e in _dados) {
+    print("----------------------------------------");
+    print("ID Especificacao: " + e.id.toString());
+    print("Desc Especificacao: " + e.descricao_setor.toString());
 
   }
 
