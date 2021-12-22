@@ -38,6 +38,10 @@ dependencies:
   curved_navigation_bar: ^1.0.1
   sqflite: ^2.0.1
   http: ^0.13.4
+  encrypt: ^5.0.1
+
+
+
 
 
 

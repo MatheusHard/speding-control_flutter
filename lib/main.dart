@@ -8,13 +8,20 @@ import 'package:control_speding_2/models/setor.dart';
 import 'package:control_speding_2/models/sub_especificacao_gastos.dart';
 import 'package:control_speding_2/models/uf.dart';
 import 'package:control_speding_2/ui/login.dart';
+import 'package:control_speding_2/utils/metods/utils.dart';
 import 'package:flutter/material.dart';
+
 
 import 'apis/especificacao_gastos_api.dart';
 
 void main() async{
 
   WidgetsFlutterBinding.ensureInitialized();
+
+
+
+
+
 
   //print(DBHelper.instance.addUf(Uf(descricao_uf: 'PErnambuco', sigla_uf: 'PE')));
 
@@ -28,7 +35,7 @@ void main() async{
 
   //List _dados = await DBHelper.instance.getSubEspecificacoes();
  // List _dados = await DBHelper.instance.getUfs();
-   List _dados = await DBHelper.instance.getSetores();
+   //List _dados = await DBHelper.instance.getSetores();
 
 
   // print(_dados);
@@ -42,12 +49,12 @@ void main() async{
   }*/
 
 
-  for (Setor e in _dados) {
+  /*for (Setor e in _dados) {
     print("----------------------------------------");
     print("ID Especificacao: " + e.id.toString());
     print("Desc Especificacao: " + e.descricao_setor.toString());
 
-  }
+  }*/
 
     /*for (var c in _dados){
 
