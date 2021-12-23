@@ -14,7 +14,7 @@ class CidadeDataModel{
               $descricao_cidade TEXT, $uf_id  INTEGER);''';
    }
 
-   static String dropDatabase(){
+   static String dropTable(){
     return   "DROP TABLE IF EXISTS $TABELA;";
   }
 

@@ -4,6 +4,7 @@ import 'package:control_speding_2/apis/cidade_api.dart';
 import 'package:control_speding_2/helper/db_helper.dart';
 import 'package:control_speding_2/models/cidade.dart';
 import 'package:control_speding_2/models/especificacao_gastos.dart';
+import 'package:control_speding_2/models/funcionario.dart';
 import 'package:control_speding_2/models/setor.dart';
 import 'package:control_speding_2/models/sub_especificacao_gastos.dart';
 import 'package:control_speding_2/models/uf.dart';
@@ -19,14 +20,15 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
 
 
-
-
-
-
   //print(DBHelper.instance.addUf(Uf(descricao_uf: 'PErnambuco', sigla_uf: 'PE')));
 
-  //print(DBHelper.instance.addCidade(Cidade(descricao_cidade: 'Anaindeuai', uf_id: 1)));
+  /*print(DBHelper.instance.addFuncionario(Funcionario(
+                                        cpf: '05694641450', email: 'matheus@gmail',
+                                        nome: 'Matheus', password: 'FREDN', telefone: '88709050',
+                                        setor_id: 2)));*/
 
+  var _dado = await DBHelper.instance.getFuncionario("05694641450");
+  print(_dado!.cpf);
   //List _dados = await DBHelper.instance.getCidadesUfs();
 
   //await EspecificacaoApi().getJson();

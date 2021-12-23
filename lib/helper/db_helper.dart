@@ -1,11 +1,13 @@
 
 import 'package:control_speding_2/data_model/cidade_data_model.dart';
 import 'package:control_speding_2/data_model/especificacao_gastos_data_model.dart';
+import 'package:control_speding_2/data_model/funcionario_data_model.dart';
 import 'package:control_speding_2/data_model/setor_data_model.dart';
 import 'package:control_speding_2/data_model/sub_especificacoes_gastos_data_model.dart';
 import 'package:control_speding_2/data_model/uf_data_model.dart';
 import 'package:control_speding_2/models/cidade.dart';
 import 'package:control_speding_2/models/especificacao_gastos.dart';
+import 'package:control_speding_2/models/funcionario.dart';
 import 'package:control_speding_2/models/setor.dart';
 import 'package:control_speding_2/models/sub_especificacao_gastos.dart';
 import 'package:control_speding_2/models/uf.dart';
@@ -46,6 +48,7 @@ class DBHelper{
     await db.execute(EspecificacaoDataModel.criarTabela());
     await db.execute(SubEspecificacaoDataModel.criarTabela());
     await db.execute(SetorDataModel.criarTabela());
+    await db.execute(FuncionarioDataModel.criarTabela());
 
   }
 
@@ -165,6 +168,32 @@ class DBHelper{
     return await db.rawDelete(SetorDataModel.zerarTabela());
 
   }
+
+  /******CRUD FUNCIONARIO******/
+
+  Future<Funcionario?>getFuncionario(String cpf) async {
+
+    Database db = await instance.database;
+    var maps = await db.query(FuncionarioDataModel.getTabela(), where: 'cpf = ?', whereArgs: [cpf]);
+    if (maps.isNotEmpty) {
+      return Funcionario.fromMap(maps.first);
+    }
+    return null;
+
+  }
+
+  Future<int> addFuncionario(Funcionario f) async {
+    Database db = await instance.database;
+    return await db.insert(FuncionarioDataModel.getTabela(), f.toMap());
+  }
+
+  Future<int> zerarTabelaFuncionario() async {
+    Database db = await instance.database;
+    return await db.rawDelete(FuncionarioDataModel.zerarTabela());
+
+  }
+
+
 
 
 }
