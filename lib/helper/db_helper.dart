@@ -5,6 +5,7 @@ import 'package:control_speding_2/data_model/funcionario_data_model.dart';
 import 'package:control_speding_2/data_model/setor_data_model.dart';
 import 'package:control_speding_2/data_model/sub_especificacoes_gastos_data_model.dart';
 import 'package:control_speding_2/data_model/uf_data_model.dart';
+import 'package:control_speding_2/data_model/viajem_data_model.dart';
 import 'package:control_speding_2/models/cidade.dart';
 import 'package:control_speding_2/models/especificacao_gastos.dart';
 import 'package:control_speding_2/models/funcionario.dart';
@@ -49,6 +50,7 @@ class DBHelper{
     await db.execute(SubEspecificacaoDataModel.criarTabela());
     await db.execute(SetorDataModel.criarTabela());
     await db.execute(FuncionarioDataModel.criarTabela());
+    await db.execute(ViajemDataModel.criarTabela());
 
   }
 
@@ -180,6 +182,17 @@ class DBHelper{
     }
     return null;
 
+  }
+
+  Future<List> getFuncionarioSetor(String cpf) async {
+    Database db = await instance.database;
+    var res = await db.rawQuery('''SELECT f.${FuncionarioDataModel.id}, f.${FuncionarioDataModel.cpf}, f.${FuncionarioDataModel.email},
+                                f.${FuncionarioDataModel.nome}, f.${FuncionarioDataModel.telefone}, f.${FuncionarioDataModel.password},
+                                s.${SetorDataModel.descricao_setor}       
+                                FROM ${FuncionarioDataModel.getTabela()} f
+                                INNER JOIN ${SetorDataModel.getTabela()} s ON s.${SetorDataModel.id} = f.${FuncionarioDataModel.setor_id} 
+                             WHERE f.${FuncionarioDataModel.cpf} = '$cpf' ''');
+    return res.toList();
   }
 
   Future<int> addFuncionario(Funcionario f) async {

@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:control_speding_2/models/setor.dart';
+
 import 'uf.dart';
 
 class Funcionario {
@@ -11,8 +13,14 @@ class Funcionario {
   String? telefone;
   String? password;
   int? setor_id;
+  Setor? setor;
 
-  Funcionario({this.id, this.cpf, this.email, this.nome, this.telefone, this.password, this.setor_id});
+  Funcionario(
+      {
+        this.id, this.cpf, this.email, this.nome,
+        this.telefone, this.password, this.setor_id,
+        this.setor
+      });
 
 
   Map<String, dynamic> toMap() {
@@ -38,6 +46,8 @@ class Funcionario {
         nome : mapa['nome'] ?? '',
         telefone: mapa['telefone'] ?? '',
         password: mapa['password'] ?? '',
-        setor_id: mapa['setor_id'] ?? 0
+        setor_id: mapa['setor_id'] ?? 0,
+        setor : Setor.fromMap(mapa)
+
     );
   }

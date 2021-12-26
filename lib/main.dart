@@ -26,29 +26,35 @@ void main() async{
                                         cpf: '05694641450', email: 'matheus@gmail',
                                         nome: 'Matheus', password: 'FREDN', telefone: '88709050',
                                         setor_id: 2)));*/
+  ///Get Funcionario:
+  ///var _dado = await DBHelper.instance.getFuncionario("05694641450");
+  ///print(_dado!.cpf);
 
-  var _dado = await DBHelper.instance.getFuncionario("05694641450");
-  print(_dado!.cpf);
+
   //List _dados = await DBHelper.instance.getCidadesUfs();
 
   //await EspecificacaoApi().getJson();
 
-  //print(DBHelper.instance.addsetor(Setor(descricao_setor: "Infra")));
+  //print(DBHelper.instance.addsetor(Setor(descricao_setor: "Developer")));
 
   //List _dados = await DBHelper.instance.getSubEspecificacoes();
  // List _dados = await DBHelper.instance.getUfs();
    //List _dados = await DBHelper.instance.getSetores();
 
 
-  // print(_dados);
+  ///Get JOin de F e Setor
+  var _dados = await DBHelper.instance.getFuncionarioSetor("05694641450");
 
-  /*for (SubEspecificacao e in _dados) {
+  print("----------------------------------------");
+  print(_dados);
+  for (var f in _dados) {
     print("----------------------------------------");
-    print("ID Especificacao: " + e.id.toString());
-    print("Desc Especificacao: " + e.descricao_sub_especificacao_gasto.toString());
-    print("Desc Especificacao ID: " + e.especificacao_gasto_id.toString());
+    print(f['id']);
+    print("Desc Especificacao: " + f['nome']);
+    print("Desc Especificacao: " + f['cpf']);
+    print("Desc Especificacao ID: " + f['descricao_setor']);
 
-  }*/
+  }
 
 
   /*for (Setor e in _dados) {
