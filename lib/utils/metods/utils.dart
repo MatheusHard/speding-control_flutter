@@ -47,7 +47,7 @@ import 'package:encrypt/encrypt.dart' as crypt;
   /***************DataHora***************/
 
   static DateTime getDataHora(){
-  return new DateTime.now();
+  return DateTime.now();
   }
   static String formatarData(String data, int type){
     var formater;

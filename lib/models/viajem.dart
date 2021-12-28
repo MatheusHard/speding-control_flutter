@@ -16,8 +16,8 @@ class Viajem {
 */
 
   int? id;
-  DateTime? data_inicial;
-  DateTime? data_final;
+  String? data_inicial;
+  String? data_final;
   double?  gasto_total;
   double? saldo;
   int? cidade_id;
@@ -46,9 +46,9 @@ class Viajem {
        'gasto_total': gasto_total,
        'saldo': saldo,
        'cidade_id': cidade_id,
-       'funcionario_id': funcionario_id,
-       'cidade': cidade,
-       'funcionario': funcionario
+       'funcionario_id': funcionario_id
+      // 'cidade': cidade,
+      // 'funcionario': funcionario
 
      };
     }

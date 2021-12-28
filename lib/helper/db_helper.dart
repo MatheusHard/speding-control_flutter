@@ -12,6 +12,7 @@ import 'package:control_speding_2/models/funcionario.dart';
 import 'package:control_speding_2/models/setor.dart';
 import 'package:control_speding_2/models/sub_especificacao_gastos.dart';
 import 'package:control_speding_2/models/uf.dart';
+import 'package:control_speding_2/models/viajem.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:io';
 import 'package:path/path.dart';
@@ -51,6 +52,7 @@ class DBHelper{
     await db.execute(SetorDataModel.criarTabela());
     await db.execute(FuncionarioDataModel.criarTabela());
     await db.execute(ViajemDataModel.criarTabela());
+
 
   }
 
@@ -205,6 +207,34 @@ class DBHelper{
     return await db.rawDelete(FuncionarioDataModel.zerarTabela());
 
   }
+
+  /******CRUD VIAGENS******/
+
+
+
+  Future<List>getViagensFuncionario(int funcionario_id) async {
+
+    Database db = await instance.database;
+    var res = await db.rawQuery('''SELECT  *
+                                   FROM ${ViajemDataModel.getTabela()} v 
+                                   WHERE v.${ViajemDataModel.funcionario_id} = $funcionario_id''');
+
+    return res.toList();
+
+
+  }
+
+  Future<int> addViajem(Viajem v) async {
+    Database db = await instance.database;
+    return await db.insert(ViajemDataModel.getTabela(), v.toMap());
+  }
+
+  Future<int> zerarTabelaViajem() async {
+    Database db = await instance.database;
+    return await db.rawDelete(ViajemDataModel.zerarTabela());
+
+  }
+
 
 
 
