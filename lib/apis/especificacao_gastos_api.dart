@@ -10,7 +10,6 @@ import 'dart:convert';
 class EspecificacaoApi{
 
   String _URL_API_CIDADES = "especificacao_gastos";
-  String _URL_API_CIDADES_POST = "api/cidade/add";
 
   //Future<int> getJson(BuildContext context) async{
   Future<int> getJson() async{
@@ -18,8 +17,6 @@ class EspecificacaoApi{
     http.Response response = await http.get(url);
 
     List _dados = json.decode(response.body);
-    //print(_dados);
-
 
     if(response.statusCode == 200) {
 

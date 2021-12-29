@@ -5,6 +5,7 @@ import 'package:control_speding_2/helper/db_helper.dart';
 import 'package:control_speding_2/models/cidade.dart';
 import 'package:control_speding_2/models/especificacao_gastos.dart';
 import 'package:control_speding_2/models/funcionario.dart';
+import 'package:control_speding_2/models/gasto.dart';
 import 'package:control_speding_2/models/setor.dart';
 import 'package:control_speding_2/models/sub_especificacao_gastos.dart';
 import 'package:control_speding_2/models/uf.dart';
@@ -57,24 +58,56 @@ void main() async{
 
   }*/
 ///VIAJEM
-  var _dado = await DBHelper.instance.addViajem(
+ /* var _dado = await DBHelper.instance.addViajem(
       Viajem(
           data_inicial: Utils.getDataHora().toString(), data_final: Utils.getDataHora().toString(),
           cidade_id: 20, funcionario_id: 2, gasto_total: 3000, saldo: 2000
-          ));
+          ));*/
 //print(_dado);
 
-List _dados = await DBHelper.instance.getViagensFuncionario(2);
+//List _dados = await DBHelper.instance.getViagensFuncionario(2);
 
 //print(_dados);
 
-  for (var e in _dados) {
+  /*for (var e in _dados) {
     print("----------------------------------------");
     print("ID : " + e['id'].toString());
 
     print("Desc Especificacao: " + e['data_inicial']);
 
+  }*/
+
+  ///CRUD GASTO
+
+  /*var _dado = await DBHelper.instance.addGasto(
+      Gasto(
+          cpf_devedor: '05694641450', data_gasto: Utils.getDataHora().toString(), fornecedor: 'Irmao Firmino',
+          imagem: 'HENDJS', latitude: '80.52145', longitude: '80.54652', subespecificacao_id: 3, valor: 30.6,
+          viajem_id: 1));
+print(_dado);*/
+
+  var _update = await DBHelper.instance.updateGasto( Gasto(id:3, cpf_devedor: '111111111', data_gasto: Utils.getDataHora().toString(), fornecedor: 'Irmao Firmino',
+      imagem: 'HENDJS', latitude: '80.52145', longitude: '99.99999', subespecificacao_id: 3, valor: 30.6,
+      viajem_id: 1));
+
+//print(_update);
+
+List _dados = await DBHelper.instance.getGastosFuncionario(1);
+
+
+  for (var e in _dados) {
+  print("----------------------------------------");
+  print("ID : " + e['id'].toString());
+
+  print("Desc Especificacao: " + e['cpf_devedor']);
+  print("Desc Especificacao: " + e['longitude']);
+
+
   }
+
+
+
+
 
     /*for (var c in _dados){
 

@@ -2,6 +2,7 @@
 import 'package:control_speding_2/data_model/cidade_data_model.dart';
 import 'package:control_speding_2/data_model/especificacao_gastos_data_model.dart';
 import 'package:control_speding_2/data_model/funcionario_data_model.dart';
+import 'package:control_speding_2/data_model/gasto_data_model.dart';
 import 'package:control_speding_2/data_model/setor_data_model.dart';
 import 'package:control_speding_2/data_model/sub_especificacoes_gastos_data_model.dart';
 import 'package:control_speding_2/data_model/uf_data_model.dart';
@@ -9,6 +10,7 @@ import 'package:control_speding_2/data_model/viajem_data_model.dart';
 import 'package:control_speding_2/models/cidade.dart';
 import 'package:control_speding_2/models/especificacao_gastos.dart';
 import 'package:control_speding_2/models/funcionario.dart';
+import 'package:control_speding_2/models/gasto.dart';
 import 'package:control_speding_2/models/setor.dart';
 import 'package:control_speding_2/models/sub_especificacao_gastos.dart';
 import 'package:control_speding_2/models/uf.dart';
@@ -38,8 +40,9 @@ class DBHelper{
 
     return  await  openDatabase(
         caminho,
-        version: 1,
-        onCreate: _onCreate);
+        version: 2,
+        onCreate: _onCreate,
+        onUpgrade: _onUpgrade);
 
   }
 
@@ -54,6 +57,10 @@ class DBHelper{
     await db.execute(ViajemDataModel.criarTabela());
 
 
+  }
+
+  void _onUpgrade(Database db, int oldVersion, int newVersion)  async {
+    await db.execute(GastoDataModel.criarTabela());
   }
 
   /******CRUD UF******/
@@ -209,15 +216,15 @@ class DBHelper{
   }
 
   /******CRUD VIAGENS******/
-
-
-
+//  Future<List<Setor>>getSetores() async {
   Future<List>getViagensFuncionario(int funcionario_id) async {
 
     Database db = await instance.database;
     var res = await db.rawQuery('''SELECT  *
                                    FROM ${ViajemDataModel.getTabela()} v 
-                                   WHERE v.${ViajemDataModel.funcionario_id} = $funcionario_id''');
+                                   WHERE v.${ViajemDataModel.funcionario_id} = $funcionario_id 
+                                   ORDER BY v.${ViajemDataModel.data_inicial} DESC''');
+    ///         ORDER BY c.${CidadeDataModel.descricao_cidade}''');
 
     return res.toList();
 
@@ -235,8 +242,35 @@ class DBHelper{
 
   }
 
+  /******CRUD GASTO******/
 
+  Future<List>getGastosFuncionario(int viajem_id) async {
 
+    Database db = await instance.database;
+    var res = await db.rawQuery('''SELECT  *
+                                   FROM ${GastoDataModel.getTabela()} g 
+                                   WHERE g.${GastoDataModel.viajem_id} = $viajem_id 
+                                   ORDER BY g.${GastoDataModel.data_gasto} DESC''');
+    return res.toList();
+
+  }
+
+  Future<int> addGasto(Gasto g) async {
+    Database db = await instance.database;
+    return await db.insert(GastoDataModel.getTabela(), g.toMap());
+  }
+
+  Future<int> updateGasto(Gasto g) async{
+
+    Database db = await instance.database;
+    return await db.update(GastoDataModel.getTabela(), g.toMap(), where: 'id = ?', whereArgs: [g.id.toString()]);
+
+  }
+  Future<int> zerarTabelaGasto() async {
+    Database db = await instance.database;
+    return await db.rawDelete(GastoDataModel.zerarTabela());
+
+  }
 
 
 }
