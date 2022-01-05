@@ -3,6 +3,7 @@ class EspecificacaoDataModel{
 
   static const String TABELA = "tabelaEspecificacao";
   static const String id = "id";
+  static const String id_web = "id_web";
   static const String descricao_especificacao_gasto = "descricao_especificacao_gasto";
 
   static String queryCriarTabela = "";
@@ -10,7 +11,7 @@ class EspecificacaoDataModel{
   static String criarTabela() {
 
     return '''CREATE TABLE $TABELA ($id INTEGER PRIMARY KEY,
-              $descricao_especificacao_gasto TEXT);''';
+              $descricao_especificacao_gasto TEXT, $id_web INTEGER);''';
   }
 
   static String dropDatabase(){

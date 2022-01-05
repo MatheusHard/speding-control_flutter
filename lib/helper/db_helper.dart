@@ -40,7 +40,7 @@ class DBHelper{
 
     return  await  openDatabase(
         caminho,
-        version: 2,
+        version: 1,
         onCreate: _onCreate,
         onUpgrade: _onUpgrade);
 
@@ -55,12 +55,12 @@ class DBHelper{
     await db.execute(SetorDataModel.criarTabela());
     await db.execute(FuncionarioDataModel.criarTabela());
     await db.execute(ViajemDataModel.criarTabela());
-
+    await db.execute(GastoDataModel.criarTabela());
 
   }
 
   void _onUpgrade(Database db, int oldVersion, int newVersion)  async {
-    await db.execute(GastoDataModel.criarTabela());
+    //await db.execute(GastoDataModel.criarTabela());
   }
 
   /******CRUD UF******/
@@ -99,7 +99,7 @@ class DBHelper{
     Database db = await instance.database;
     var res = await db.rawQuery('''SELECT c.${CidadeDataModel.id}, c.${CidadeDataModel.descricao_cidade},
         c.${CidadeDataModel.uf_id}, u.${UfDataModel.descricao_uf} FROM ${CidadeDataModel.getTabela()} c
-         INNER JOIN ${UfDataModel.getTabela()} u WHERE u.${UfDataModel.id} = c.${CidadeDataModel.uf_id}
+         INNER JOIN ${UfDataModel.getTabela()} u WHERE u.${UfDataModel.id_web} = c.${CidadeDataModel.uf_id}
          ORDER BY c.${CidadeDataModel.descricao_cidade}''');
 
     return res.toList();
@@ -182,6 +182,16 @@ class DBHelper{
 
   /******CRUD FUNCIONARIO******/
 
+  Future<List<Funcionario>>getAllFuncionarios() async {
+    Database db = await instance.database;
+    var funcionarios = await db.query(FuncionarioDataModel.getTabela());
+    List<Funcionario> funcionarioList = funcionarios.isNotEmpty
+        ? funcionarios.map((f) => Funcionario.fromMap(f)).toList()
+        : [];
+    return funcionarioList;
+  }
+
+
   Future<Funcionario?>getFuncionario(String cpf) async {
 
     Database db = await instance.database;
@@ -197,9 +207,9 @@ class DBHelper{
     Database db = await instance.database;
     var res = await db.rawQuery('''SELECT f.${FuncionarioDataModel.id}, f.${FuncionarioDataModel.cpf}, f.${FuncionarioDataModel.email},
                                 f.${FuncionarioDataModel.nome}, f.${FuncionarioDataModel.telefone}, f.${FuncionarioDataModel.password},
-                                s.${SetorDataModel.descricao_setor}       
+                                f.${FuncionarioDataModel.id_web} as id_web, s.${SetorDataModel.descricao_setor}       
                                 FROM ${FuncionarioDataModel.getTabela()} f
-                                INNER JOIN ${SetorDataModel.getTabela()} s ON s.${SetorDataModel.id} = f.${FuncionarioDataModel.setor_id} 
+                                INNER JOIN ${SetorDataModel.getTabela()} s ON s.${SetorDataModel.id_web} = f.${FuncionarioDataModel.setor_id} 
                              WHERE f.${FuncionarioDataModel.cpf} = '$cpf' ''');
     return res.toList();
   }
@@ -261,7 +271,6 @@ class DBHelper{
   }
 
   Future<int> updateGasto(Gasto g) async{
-
     Database db = await instance.database;
     return await db.update(GastoDataModel.getTabela(), g.toMap(), where: 'id = ?', whereArgs: [g.id.toString()]);
 

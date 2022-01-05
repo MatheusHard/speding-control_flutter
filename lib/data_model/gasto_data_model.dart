@@ -12,6 +12,8 @@ class GastoDataModel{
   static const String subespecificacao_id = "subespecificacao_id";
   static const String valor = "valor";
   static const String viajem_id = "viajem_id";
+  static const String id_web = "id_web";
+
 
 
   static String queryCriarTabela = "";
@@ -21,7 +23,8 @@ class GastoDataModel{
     return '''CREATE TABLE $TABELA ($id INTEGER PRIMARY KEY,
               $cpf_devedor TEXT, $data_gasto DATETIME, $fornecedor TEXT,
               $imagem TEXT, $latitude TEXT, $longitude TEXT, 
-              $subespecificacao_id INTEGER, $valor REAL, $viajem_id INTEGER);''';
+              $subespecificacao_id INTEGER, $valor REAL, $viajem_id INTEGER,
+              $id_web INTEGER);''';
    }
 
    static String dropTable(){

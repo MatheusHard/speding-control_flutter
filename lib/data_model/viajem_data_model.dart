@@ -9,14 +9,16 @@ class ViajemDataModel{
   static const String saldo = "saldo";
   static const String cidade_id = "cidade_id";
   static const String funcionario_id = "funcionario_id";
+  static const String id_web = "id_web";
 
-   static String queryCriarTabela = "";
+
+  static String queryCriarTabela = "";
 
    static String criarTabela() {
 
     return '''CREATE TABLE $TABELA ($id INTEGER PRIMARY KEY,
               $data_inicial DATETIME, $data_final DATETIME, $gasto_total REAL,
-              $saldo REAL, $cidade_id INTEGER, $funcionario_id  INTEGER);''';
+              $saldo REAL, $cidade_id INTEGER, $funcionario_id  INTEGER, $id_web INTEGER);''';
    }
 
    static String dropTable(){

@@ -11,6 +11,7 @@ import 'uf.dart';
 class Gasto {
 
   int? id;
+  int? id_web;
   String? cpf_devedor;
   String? data_gasto;
   String?  fornecedor;
@@ -26,7 +27,7 @@ class Gasto {
       {
         this.id, this.cpf_devedor, this.data_gasto, this.fornecedor,
         this.imagem, this.latitude, this.longitude, this.subespecificacao_id,
-        this.valor, this.viajem_id, this.viajem
+        this.valor, this.viajem_id, this.viajem, this.id_web
       });
 
 
@@ -35,6 +36,7 @@ class Gasto {
      return {
 
        'id': id,
+       'id_web': id_web,
        'cpf_devedor': cpf_devedor,
        'data_gasto': data_gasto,
        'fornecedor': fornecedor,
@@ -53,6 +55,7 @@ class Gasto {
     factory Gasto.fromMap(Map<String, dynamic> mapa) => Gasto (
 
       id : mapa['id'] ?? 0,
+      id_web: mapa['id_web'] ?? 0,
       cpf_devedor : mapa['cpf_devedor'],
       data_gasto : mapa['data_gasto'],
       fornecedor: mapa['fornecedor'],

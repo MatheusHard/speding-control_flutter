@@ -37,7 +37,7 @@ class EspecificacaoApi{
                                                                     descricao_sub_especificacao_gasto: sub[j]["descricao_sub_especificacao_gasto"],
                                                                     especificacao_gasto_id: _dados[i]["id"]));
 
-       // print(sub[j]);
+        print(sub[j]);
       }
       }
 

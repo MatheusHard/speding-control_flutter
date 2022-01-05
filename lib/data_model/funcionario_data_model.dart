@@ -9,14 +9,16 @@ class FuncionarioDataModel{
   static const String telefone = "telefone";
   static const String password = "password";
   static const String setor_id = "setor_id";
+  static const String id_web = "id_web";
 
-   static String queryCriarTabela = "";
+
+  static String queryCriarTabela = "";
 
    static String criarTabela() {
 
     return '''CREATE TABLE $TABELA ($id INTEGER PRIMARY KEY,
               $cpf TEXT, $email TEXT, $nome TEXT, $telefone TEXT,
-              $password TEXT, $setor_id  INTEGER);''';
+              $password TEXT, $setor_id  INTEGER, $id_web INTEGER);''';
    }
 
    static String dropTable(){

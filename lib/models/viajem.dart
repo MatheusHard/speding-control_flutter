@@ -16,6 +16,7 @@ class Viajem {
 */
 
   int? id;
+  int? id_web;
   String? data_inicial;
   String? data_final;
   double?  gasto_total;
@@ -32,7 +33,7 @@ class Viajem {
       {
         this.id, this.data_inicial, this.data_final, this.gasto_total,
         this.saldo, this.cidade_id, this.funcionario_id, this.cidade,
-        this.funcionario
+        this.funcionario, this.id_web
       });
 
 
@@ -41,6 +42,7 @@ class Viajem {
      return {
 
        'id': id,
+       'id_web': id_web,
        'data_inicial': data_inicial,
        'data_final': data_final,
        'gasto_total': gasto_total,
@@ -56,6 +58,7 @@ class Viajem {
     factory Viajem.fromMap(Map<String, dynamic> mapa) => Viajem (
 
       id : mapa['id'] ?? 0,
+      id_web: mapa['id_web'] ?? 0,
       data_inicial : mapa['data_inicial'],
       data_final : mapa['data_final'],
       gasto_total: mapa['gasto_total'],

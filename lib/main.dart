@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:control_speding_2/apis/cidade_api.dart';
+import 'package:control_speding_2/apis/funcionario_api.dart';
 import 'package:control_speding_2/helper/db_helper.dart';
 import 'package:control_speding_2/models/cidade.dart';
 import 'package:control_speding_2/models/especificacao_gastos.dart';
@@ -22,12 +23,32 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
 
 
-  //print(DBHelper.instance.addUf(Uf(descricao_uf: 'PErnambuco', sigla_uf: 'PE')));
+  //print(DBHelper.instance.addUf(Uf(descricao_uf: 'PErnambuco', sigla_uf: 'PE', id_web: 1)));
 
-  print(DBHelper.instance.addFuncionario(Funcionario(
+ // print(DBHelper.instance.addCidade(Cidade(descricao_cidade: 'PErnambuco', id_web: 1, uf_id: 1)));
+
+  /*DBHelper.instance.addFuncionario(Funcionario(
+      id_web: 1,
+      cpf: '05694641450', email: 'matheus@gmail',
+      nome: 'Luna', password: 'FREDN', telefone: '88709050',
+      setor_id: 3));*/
+
+
+
+   /*var _dado = await DBHelper.instance.addGasto(
+      Gasto(
+          cpf_devedor: '05694641450', data_gasto: Utils.getDataHora().toString(), fornecedor: 'Irmao Firmino',
+          imagem: 'HENDJS', latitude: '80.52145', longitude: '80.54652', subespecificacao_id: 3, valor: 30.6,
+          viajem_id: 1, id_web: 2));
+
+   print(_dado);*/
+
+
+
+  /* print(DBHelper.instance.addFuncionario(Funcionario(
                                         cpf: '05694641450', email: 'matheus@gmail',
                                         nome: 'Matheus', password: 'FREDN', telefone: '88709050',
-                                        setor_id: 2)));
+                                        setor_id: 2)));*/
   ///Get Funcionario:
   //var _dado = await DBHelper.instance.getFuncionario("05694641450");
   ///print(_dado!.cpf);
@@ -36,18 +57,24 @@ void main() async{
   //List _dados = await DBHelper.instance.getCidadesUfs();
 
   //await EspecificacaoApi().getJson();
+//await FuncionarioApi().getJson(1);
 
   //print(DBHelper.instance.addsetor(Setor(descricao_setor: "Developer")));
 
+  //await EspecificacaoApi().getJson();
   //List _dados = await DBHelper.instance.getSubEspecificacoes();
- // List _dados = await DBHelper.instance.getUfs();
+  //print(_dados);
+
+
+
+
+  // List _dados = await DBHelper.instance.getUfs();
    //List _dados = await DBHelper.instance.getSetores();
 
 
   ///Get JOin de F e Setor
   //var _dados = await DBHelper.instance.getFuncionarioSetor("05694641450");
 
-  print("----------------------------------------");
   //print(_dados);
   /*for (var f in _dados) {
     print("----------------------------------------");
@@ -58,24 +85,26 @@ void main() async{
 
   }*/
 ///VIAJEM
- /* var _dado = await DBHelper.instance.addViajem(
+  /*var _dado = await DBHelper.instance.addViajem(
       Viajem(
+          id_web: 4,
           data_inicial: Utils.getDataHora().toString(), data_final: Utils.getDataHora().toString(),
-          cidade_id: 20, funcionario_id: 2, gasto_total: 3000, saldo: 2000
-          ));*/
-//print(_dado);
+          cidade_id: 20, funcionario_id: 2, gasto_total: 4000, saldo: 1500
+          ));
+print(_dado);*/
 
-//List _dados = await DBHelper.instance.getViagensFuncionario(2);
+List _dados = await DBHelper.instance.getViagensFuncionario(3);
 
 //print(_dados);
 
-  /*for (var e in _dados) {
+  for (var e in _dados) {
     print("----------------------------------------");
     print("ID : " + e['id'].toString());
+    print("Funcionario:"+e['funcionario_id'].toString());
+    print("SAldo:"+e['saldo'].toString());
+    print("DAtaInicial: " + e['data_inicial']);
 
-    print("Desc Especificacao: " + e['data_inicial']);
-
-  }*/
+  }
 
   ///CRUD GASTO
 
@@ -86,11 +115,11 @@ void main() async{
           viajem_id: 1));
 print(_dado);*/
 
-  var _update = await DBHelper.instance.updateGasto( Gasto(id:3, cpf_devedor: '111111111', data_gasto: Utils.getDataHora().toString(), fornecedor: 'Irmao Firmino',
+  /*var _update = await DBHelper.instance.updateGasto( Gasto(id:3, cpf_devedor: '111111111', data_gasto: Utils.getDataHora().toString(), fornecedor: 'Irmao Firmino',
       imagem: 'HENDJS', latitude: '80.52145', longitude: '99.99999', subespecificacao_id: 3, valor: 30.6,
       viajem_id: 1));
 
-//print(_update);
+print(_update);
 
 List _dados = await DBHelper.instance.getGastosFuncionario(1);
 
@@ -103,15 +132,17 @@ List _dados = await DBHelper.instance.getGastosFuncionario(1);
   print("Desc Especificacao: " + e['longitude']);
 
 
-  }
+  }*/
 
+ /* var status = await FuncionarioApi().getJson(1);
 
+  print(status);
 
+  var _dados = await DBHelper.instance.getAllFuncionarios();
 
+  for (var c in _dados){
 
-    /*for (var c in _dados){
-
-    print(c['id']);
+    print(c.nome);
 
   }*/
 

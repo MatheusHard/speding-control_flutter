@@ -13,13 +13,14 @@ class Funcionario {
   String? telefone;
   String? password;
   int? setor_id;
+  int? id_web;
   Setor? setor;
 
   Funcionario(
       {
         this.id, this.cpf, this.email, this.nome,
         this.telefone, this.password, this.setor_id,
-        this.setor
+        this.setor, this.id_web
       });
 
 
@@ -28,6 +29,7 @@ class Funcionario {
      return {
 
        'id': id,
+       'id_web': id_web,
        'cpf': cpf,
        'email': email,
        'nome': nome,
@@ -41,6 +43,7 @@ class Funcionario {
     factory Funcionario.fromMap(Map<String, dynamic> mapa) => Funcionario (
 
         id : mapa['id'] ?? 0,
+        id_web: mapa['id_web'] ?? 0,
         cpf : mapa['cpf'] ?? '',
         email : mapa['email'] ?? '',
         nome : mapa['nome'] ?? '',

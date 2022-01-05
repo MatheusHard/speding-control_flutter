@@ -5,13 +5,15 @@ class UfDataModel{
   static const String id = "id";
   static const String descricao_uf = "descricao_uf";
   static const String sigla_uf = "sigla_uf";
+  static const String id_web = "id_web";
 
-   static String queryCriarTabela = "";
+
+  static String queryCriarTabela = "";
 
    static String criarTabela() {
 
     return '''CREATE TABLE $TABELA ($id INTEGER PRIMARY KEY,
-              $descricao_uf TEXT, $sigla_uf  TEXT);''';
+              $descricao_uf TEXT, $sigla_uf  TEXT, $id_web INTEGER);''';
    }
 
    static String dropDatabase(){
